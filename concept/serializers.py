@@ -1,10 +1,8 @@
-from asyncore import read
 from rest_framework import serializers
 from .models import Concept
 
 
 class ChoiceField(serializers.ChoiceField):
-
     def to_representation(self, obj):
         if obj == '' and self.allow_blank:
             return obj
