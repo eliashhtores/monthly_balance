@@ -6,5 +6,5 @@ from .serializers import ConceptSerializer
 class ConceptViewSet(viewsets.ModelViewSet):
     """API to manage concepts in the database"""
 
-    queryset = Concept.objects.all()
+    queryset = Concept.objects.order_by('-type', 'name')
     serializer_class = ConceptSerializer
