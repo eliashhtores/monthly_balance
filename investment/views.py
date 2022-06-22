@@ -9,11 +9,13 @@ class InvestmentViewSet(viewsets.ModelViewSet):
     queryset = Investment.objects.all()
     serializer_class = InvestmentSerializer
 
-    # def get_queryset(self):
-    #     if (self.request.GET.get('start_date') is None):
-    #         return self.queryset
+    def get_queryset(self):
+        queryset = super().get_queryset()
 
-    # if (self.request.GET.get('end_date')):
-    #     return Investment.objects.filter(start_date__gte=self.request.GET.get('start_date'), start_date__lte=self.request.GET.get('end_date'))
+        if (self.request.GET.get('start_date') is None):
+            return queryset
 
-    # return Investment.objects.filter(start_date__gte=self.request.GET.get('start_date'))
+        if (self.request.GET.get('end_date')):
+            return queryset.filter(start_date__gte=self.request.GET.get('start_date'), start_date__lte=self.request.GET.get('end_date'))
+
+        return queryset.filter(start_date__gte=self.request.GET.get('start_date'))
