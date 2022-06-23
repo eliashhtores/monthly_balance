@@ -10,7 +10,9 @@ class Saving(TimeStampedModel):
 
 
 class SavingDetail(TimeStampedModel):
-    saving = models.ForeignKey(Saving, on_delete=models.CASCADE)
+    saving = models.ForeignKey(
+        Saving, on_delete=models.CASCADE, related_name='saving_detail_set'
+    )
     number = models.IntegerField(default=1)
     date = models.DateField()
     paid = models.BooleanField(default=False)
