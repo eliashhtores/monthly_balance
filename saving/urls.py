@@ -5,6 +5,7 @@ from . import views
 
 router = DefaultRouter()
 router.register('saving', views.SavingViewSet)
+router.register('saving-detail', views.SavingDetailViewSet)
 
 app_name = 'saving'
 

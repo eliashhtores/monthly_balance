@@ -3,6 +3,14 @@ from model_utils.models import TimeStampedModel
 
 
 class Saving(TimeStampedModel):
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class SavingDetail(TimeStampedModel):
+    saving = models.ForeignKey(Saving, on_delete=models.CASCADE)
     number = models.IntegerField(default=1)
     date = models.DateField()
     paid = models.BooleanField(default=False)
