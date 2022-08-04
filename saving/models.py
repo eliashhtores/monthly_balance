@@ -17,10 +17,11 @@ class SavingDetail(TimeStampedModel):
     date = models.DateField()
     paid = models.BooleanField(default=False)
     payback = models.IntegerField(blank=True, null=True)
+    received = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('number', 'date')
-        ordering = ('number', 'date')
+        unique_together = ('saving', 'number', 'date')
+        ordering = ('id', )
 
     def __str__(self):
         return f'{str(self.number)} - {str(self.date)}'

@@ -8,8 +8,8 @@ class SavingAdmin(admin.ModelAdmin):
 
 
 class SavingDetailAdmin(admin.ModelAdmin):
-    list_display = ('id', 'number', 'date', 'paid', 'payback')
-    list_filter = ('paid',)
+    list_display = ('id', 'number', 'date', 'paid', 'payback', 'received')
+    list_filter = ('paid', 'received')
     search_fields = ('number',)
 
 
