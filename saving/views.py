@@ -11,6 +11,7 @@ class SavingViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         saving = Saving.objects.create()
+        saving.active = request.data['active']
         saving_details = request.data['saving_detail_set']
 
         details = [SavingDetail(
@@ -22,7 +23,17 @@ class SavingViewSet(viewsets.ModelViewSet):
         saving.save()
         SavingDetail.objects.bulk_create(details)
 
-        return Response(SavingSerializer(saving).data, status=201)
+        return Response(SavingSerializer(saving).data, status=status.HTTP_201_CREATED)
+
+    def partial_update(self, request, *args, **kwargs):
+        try:
+            saving = Saving.objects.get(pk=kwargs['pk'])
+            saving.active = not saving.active
+            saving.save()
+            return Response(SavingSerializer(saving).data, status=status.HTTP_200_OK)
+        except Saving.DoesNotExist:
+            message = 'Saving not found'
+            return Response({'message': message}, status=status.HTTP_404_NOT_FOUND)
 
 
 class SavingDetailViewSet(viewsets.ModelViewSet):
