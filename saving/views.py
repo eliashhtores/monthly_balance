@@ -20,10 +20,13 @@ class SavingViewSet(viewsets.ModelViewSet):
             date=saving_detail.get('date'))
             for saving_detail in saving_details]
 
-        saving.save()
-        SavingDetail.objects.bulk_create(details)
-
-        return Response(SavingSerializer(saving).data, status=status.HTTP_201_CREATED)
+        try:
+            saving.save()
+            SavingDetail.objects.bulk_create(details)
+            return Response(SavingSerializer(saving).data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            saving.delete()
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def partial_update(self, request, *args, **kwargs):
         try:
