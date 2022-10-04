@@ -17,4 +17,4 @@ class Concept(TimeStampedModel):
         unique_together = ('name', 'type')
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.get_type_display()}'

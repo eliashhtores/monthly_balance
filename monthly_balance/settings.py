@@ -16,6 +16,9 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    # "unfold",
+    # "unfold.contrib.numeric_filters",
+    # 'admin_soft.apps.AdminSoftDashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -25,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'concept',
+    'finance',
     'investment',
     'saving',
 ]
